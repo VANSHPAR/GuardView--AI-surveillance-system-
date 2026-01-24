@@ -22,6 +22,8 @@ const videos = [
   },
 ];
 
+// dashboard
+
 const Dashboard = () => {
   const [pausedStates, setPausedStates] = useState({});
   const [fullscreenStates, setFullscreenStates] = useState({});

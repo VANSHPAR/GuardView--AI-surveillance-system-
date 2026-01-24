@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FaCheck, FaCrown, FaRocket, FaStar, FaShieldAlt } from "react-icons/fa";
 import { motion } from "framer-motion";
 
+//pricing
 const pricingPlans = [
   {
     name: "Basic",
