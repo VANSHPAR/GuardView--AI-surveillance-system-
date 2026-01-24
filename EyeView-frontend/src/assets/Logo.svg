@@ -1,0 +1,39 @@
+<svg width="200" height="60" viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g transform="translate(0, 10)">
+    <circle cx="25" cy="20" r="18" fill="url(#lensGradient)" stroke="url(#lensBorder)" stroke-width="2"/>
+    <circle cx="25" cy="20" r="12" fill="url(#irisGradient)" stroke="#ffffff" stroke-width="1"/>
+    <circle cx="25" cy="20" r="6" fill="#000000"/>
+    <circle cx="22" cy="17" r="3" fill="#ffffff" opacity="0.8"/>
+    <circle cx="21" cy="16" r="1.5" fill="#ffffff" opacity="0.6"/>
+    <rect x="15" y="30" width="20" height="8" rx="2" fill="url(#bodyGradient)" opacity="0.7"/>
+  </g>
+
+  <text x="55" y="25" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="url(#textGradient)">EyeView</text>
+  <text x="55" y="42" font-family="Arial, sans-serif" font-size="10" fill="#888888">AI Surveillance</text>
+
+  <defs>
+    <linearGradient id="lensGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#8b5cf6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ec4899;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="lensBorder" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#60a5fa;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f472b6;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="irisGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e40af;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#7c3aed;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#be185d;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="bodyGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#374151;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1f2937;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#8b5cf6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ec4899;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+</svg>

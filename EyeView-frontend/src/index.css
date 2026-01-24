@@ -1,0 +1,90 @@
+@import 'tailwindcss';
+@layer theme, base, components, utilities;
+
+@theme {
+  --font-inter: 'Inter', 'sans-serif';
+  --color-blue-100: #47a5c5;
+  --color-pink-200: #ef476f;
+  --color-yellow-50: #ffd60a;
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
+
+:root {
+    --color-richblack-5: #F1F2FF;
+    --color-richblack-25: #DBDDEA;
+    --color-richblack-100: #AFB2BF;
+    --color-richblack-200: #999DAA;
+    --color-richblack-700: #2C333F;
+    --color-richblack-800: #161D29;
+    --color-richblack-900: #000814;
+  }
+
+/* Mobile responsiveness enhancements */
+@media (max-width: 768px) {
+  /* Ensure minimum touch target size */
+  button, .btn, input[type="submit"], input[type="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Improve text readability on small screens */
+  body {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  /* Reduce padding on mobile for better space usage */
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  /* Ensure images are responsive */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* Additional mobile optimizations */
+@media (max-width: 480px) {
+  /* Smaller font sizes for very small screens */
+  h1 {
+    font-size: 2rem !important;
+  }
+
+  h2 {
+    font-size: 1.5rem !important;
+  }
+
+  h3 {
+    font-size: 1.25rem !important;
+  }
+
+  /* Adjust spacing */
+  .space-y-8 > * + * {
+    margin-top: 1.5rem !important;
+  }
+
+  .gap-8 {
+    gap: 1.5rem !important;
+  }
+}
+  
