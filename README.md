@@ -21,15 +21,20 @@ To assist security personnel and surveillance systems by automatically detecting
 4.  **Visualization:** Detected threats are highlighted with bounding boxes on the video stream.
 5.  **Output:** The processed stream and alerts are displayed on a **React-based** web dashboard.
 
+
 ---
 
 ## 🛠️ Technologies Used
 
 ### Backend
 * **Python:** Core programming language
+
 * **Flask:** Web server for streaming video to the frontend
+
 * **OpenCV:** Image processing and frame capture
+
 * **YOLO:** Deep learning model for object/action detection
+
 
 ### Frontend
 * **React (Vite):** Fast, modern frontend framework

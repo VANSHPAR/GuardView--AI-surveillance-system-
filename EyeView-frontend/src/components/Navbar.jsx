@@ -39,12 +39,12 @@ const Navbar = ({ user, sidebarOpen, setSidebarOpen }) => {
         className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-slate-900/80 border-b border-white/10"
       >
         <div className="flex justify-between items-center w-11/12 max-w-7xl py-4 mx-auto">
-          {/* Brand */}
+          {/* brand */}
           <Link to="/" className="text-2xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent hover:from-blue-300 hover:via-purple-300 hover:to-pink-300 transition-all duration-300">
             eyeview.ai
           </Link>
 
-          {/* Desktop Navigation */}
+          {/*desktop navigation*/}
           <nav className="hidden md:block">
             <ul className="flex gap-x-8">
               {navLinks.map((item, i) => (
