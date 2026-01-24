@@ -2,7 +2,7 @@
 
 > **Note:** This project is submitted as a **Midway Project** and is currently under active development.
   <p align="center">
-  <img src="https://mvdamathura.com/propertyonsale.html" alt="GuardView Demo" width="600">
+  <img src="./work.gif" alt="GuardView Demo" width="600">
 </p>
 
 ## 📌 Overview
