@@ -42,7 +42,7 @@ This system is designed for:
 
 ## 🎥 Demo
 
-**Demo Video:** [Watch the Video Here]([https://youtu.be/YOUR_VIDEO_LINK](https://youtu.be/SgydOSFpxjg?si=CQxbtipdeUpr3Kmv))
+**Demo Video:** [Watch the Video Here](https://youtu.be/SgydOSFpxjg?si=CQxbtipdeUpr3Kmv)
 
 ---
 
