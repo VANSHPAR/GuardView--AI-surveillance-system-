@@ -70,3 +70,104 @@ This system is designed for:
 │
 ├── README.md
 └── LICENSE
+
+## 🔧 Environment Configuration
+
+### 🐍 Backend Configuration (`Backend/.env`)
+
+```bash
+# 📞 Twilio Integration (SMS/Call Alerts)
+TWILIO_ACCOUNT_SID=your_twilio_account_sid
+TWILIO_AUTH_TOKEN=your_twilio_auth_token
+TWILIO_PHONE_NUMBER=+1234567890       # 📱 Twilio registered number
+ADMIN_PHONE_NUMBER=+919876543210      # 🚨 Alert recipient number
+
+# 🔥 Firebase Configuration
+FIREBASE_CONFIG=your_firebase_config_json
+FIREBASE_STORAGE_BUCKET=your_storage_bucket
+```
+
+### ⚛️ Frontend Configuration (`EyeView-frontend/.env`)
+
+```bash
+# 🔥 Firebase Web SDK Configuration
+REACT_APP_FIREBASE_API_KEY=your_firebase_api_key
+REACT_APP_FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
+REACT_APP_FIREBASE_PROJECT_ID=your_project_id
+REACT_APP_FIREBASE_STORAGE_BUCKET=your_project.appspot.com
+REACT_APP_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
+REACT_APP_FIREBASE_APP_ID=your_app_id
+
+# 🌐 API Configuration
+REACT_APP_API_BASE_URL=http://localhost:5000
+```
+
+---
+
+## 🚀 Quick Start Guide
+
+### 📥 Clone the Repository
+
+```bash
+git clone https://github.com/sahilhinge89/EyeView_v2.git
+cd EyeView_v2
+```
+
+### 🐍 Backend Setup
+
+```bash
+# Navigate to backend directory
+cd Backend
+
+# Ensure Firebase credentials file is present
+# The file 'eyeview-v2-firebase-adminsdk-fbsvc-a1600b8e74.json' should be in this directory
+ls eyeview-v2-firebase-adminsdk-fbsvc-a1600b8e74.json
+
+# Create virtual environment
+python -m venv venv
+```
+
+**🔄 Activate Virtual Environment:**
+
+<details>
+<summary>💻 Windows (PowerShell)</summary>
+
+```bash
+.\venv\Scripts\activate
+```
+
+</details>
+
+<details>
+<summary>🐧 macOS/Linux</summary>
+
+```bash
+source venv/bin/activate
+```
+
+</details>
+
+**📦 Install Dependencies & Run:**
+
+```bash
+# Install required packages
+pip install -r requirements.txt
+
+# Start the backend server
+python eye-view.py
+```
+
+> 🟢 **Backend Status**: Server running on `http://localhost:5000`
+
+### ⚛️ Frontend Setup
+
+```bash
+# Navigate to frontend directory
+cd EyeView-frontend
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+```
