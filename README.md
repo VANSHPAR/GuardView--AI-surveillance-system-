@@ -109,8 +109,8 @@ REACT_APP_API_BASE_URL=http://localhost:5000
 ### 📥 Clone the Repository
 
 ```bash
-git clone https://github.com/sahilhinge89/EyeView_v2.git
-cd EyeView_v2
+git clone https://github.com/VANSHPAR/GuardView--AI-surveillance-system-
+cd GuardView--AI-surveillance-system-
 ```
 
 ### 🐍 Backend Setup
@@ -119,9 +119,9 @@ cd EyeView_v2
 # Navigate to backend directory
 cd Backend
 
-# Ensure Firebase credentials file is present
-# The file 'eyeview-v2-firebase-adminsdk-fbsvc-a1600b8e74.json' should be in this directory
-ls eyeview-v2-firebase-adminsdk-fbsvc-a1600b8e74.json
+# (Optional) Check if Firebase credentials file exists
+# Place your Firebase service account JSON here if used
+ls
 
 # Create virtual environment
 python -m venv venv
@@ -154,7 +154,7 @@ source venv/bin/activate
 pip install -r requirements.txt
 
 # Start the backend server
-python eye-view.py
+python eye-view
 ```
 
 > 🟢 **Backend Status**: Server running on `http://localhost:5000`
@@ -163,7 +163,7 @@ python eye-view.py
 
 ```bash
 # Navigate to frontend directory
-cd EyeView-frontend
+cd frontend
 
 # Install dependencies
 npm install
