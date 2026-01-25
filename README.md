@@ -58,3 +58,71 @@ GuardView/
 │
 ├── README.md
 
+## 🚀 Quick Start Guide
+
+### 📥 Clone the Repository
+
+```bash
+git clone https://github.com/sahilhinge89/EyeView_v2.git
+cd EyeView_v2
+```
+
+### 🐍 Backend Setup
+
+```bash
+# Navigate to backend directory
+cd Backend
+
+# Ensure Firebase credentials file is present
+# The file 'eyeview-v2-firebase-adminsdk-fbsvc-a1600b8e74.json' should be in this directory
+ls eyeview-v2-firebase-adminsdk-fbsvc-a1600b8e74.json
+
+# Create virtual environment
+python -m venv venv
+```
+
+**🔄 Activate Virtual Environment:**
+
+<details>
+<summary>💻 Windows (PowerShell)</summary>
+
+```bash
+.\venv\Scripts\activate
+```
+
+</details>
+
+<details>
+<summary>🐧 macOS/Linux</summary>
+
+```bash
+source venv/bin/activate
+```
+
+</details>
+
+**📦 Install Dependencies & Run:**
+
+```bash
+# Install required packages
+pip install -r requirements.txt
+
+# Start the backend server
+python eye-view.py
+```
+
+> 🟢 **Backend Status**: Server running on `http://localhost:5000`
+
+### ⚛️ Frontend Setup
+
+```bash
+# Navigate to frontend directory
+cd EyeView-frontend
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+```
+
