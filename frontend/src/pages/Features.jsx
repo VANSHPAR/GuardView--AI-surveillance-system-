@@ -31,7 +31,7 @@ const featuresData = [
   {
     title: "Firebase + Twilio Integration",
     description:
-      "Utilizes Firebase for secure cloud storage of clips and Twilio to deliver SMS/email alerts instantly upon detection.",
+      "Utilizes Firebase for secure cloud storage of clips and Twilio to deliver SMS alerts instantly upon detection.",
     icon: <MdSecurity size={32} />,
     color: "from-green-500 to-emerald-500",
     bgColor: "bg-gradient-to-br from-green-500/10 to-emerald-500/10",

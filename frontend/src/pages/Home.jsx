@@ -226,7 +226,7 @@ function Home({ user }) {
             </div>
             <h3 className="text-xl font-semibold mb-2">Instant Alerts</h3>
             <p className="text-gray-400">
-              SMS and email notifications sent immediately upon detection
+              SMS notifications sent immediately upon detection
             </p>
           </div>
 

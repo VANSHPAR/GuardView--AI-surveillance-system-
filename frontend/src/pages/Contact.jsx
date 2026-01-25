@@ -20,7 +20,7 @@ const contactInfo = [
   {
     icon: <FaEnvelope className="text-blue-400" size={32} />,
     title: "Email",
-    value: "support@eyeview.ai",
+    value: "support@GuardView.ai",
     description: "Send us an email anytime",
     bgColor: "bg-gradient-to-br from-blue-500/10 to-cyan-500/10",
     borderColor: "border-blue-500/20",

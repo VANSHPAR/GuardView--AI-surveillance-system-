@@ -11,8 +11,10 @@ const SignupForm = () => {
     firstName: "",
     lastName: "",
     email: "",
+    phone: "",
     password: "",
-    confirmPassword: "",
+    confirmPassword: ""
+
   });
 
   const [showPassword, setShowPassword] = useState(false);
@@ -35,7 +37,7 @@ const SignupForm = () => {
 
     setIsLoading(true);
     try {
-      await signup(formData.email, formData.password, formData.firstName, formData.lastName);
+      await signup(formData.email, formData.password,  formData.phone, formData.firstName, formData.lastName);
       navigate("/dashboard");
     } catch (error) {
       // Error is handled in the auth context
@@ -100,6 +102,25 @@ const SignupForm = () => {
               onChange={changeHandler}
               placeholder="Enter your email"
               value={formData.email}
+              className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 backdrop-blur-sm"
+            />
+          </label>
+        </div>
+        {/*Phone*/ }
+        <div className="w-full">
+          <label className="block">
+            <span className="text-sm font-medium text-gray-300 mb-2 block">
+              Phone <span className="text-red-400">*</span>
+            </span>
+            <input
+              required
+              type="tel"
+              name="phone"
+              onChange={changeHandler}
+              placeholder="Enter your phone number"
+              value={formData.phone}
+              pattern="[0-9]{10}"
+              maxLength="10"
               className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 backdrop-blur-sm"
             />
           </label>

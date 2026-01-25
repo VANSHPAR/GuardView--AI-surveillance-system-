@@ -13,10 +13,10 @@ const pricingPlans = [
     features: [
       "Up to 5 cameras",
       "Real-time violence detection",
-      "Email alerts",
+      "SMS alerts",
       "Basic analytics",
       "Mobile app access",
-      "24/7 email support"
+      "24/7 SMS support"
     ],
     popular: false,
     bgColor: "bg-gradient-to-br from-blue-500/10 to-cyan-500/10",
@@ -32,7 +32,7 @@ const pricingPlans = [
     features: [
       "Up to 25 cameras",
       "Advanced AI detection",
-      "SMS & email alerts",
+      "SMS alerts",
       "Advanced analytics dashboard",
       "API access",
       "Priority phone support",

@@ -24,7 +24,8 @@ const Profile = () => {
   const [editForm, setEditForm] = useState({
     first_name: '',
     last_name: '',
-    email: ''
+    email: '',
+    phone: ''
   });
   const [loading, setLoading] = useState(true);
 
@@ -42,7 +43,8 @@ const Profile = () => {
       setEditForm({
         first_name: response.data.user.first_name,
         last_name: response.data.user.last_name,
-        email: response.data.user.email
+        email: response.data.user.email,
+        phone: response.data.user.phone
       });
     } catch (error) {
       toast.error('Failed to load profile');
@@ -119,7 +121,9 @@ const Profile = () => {
                   <h2 className="text-2xl font-bold mb-2">
                     {profileData?.first_name} {profileData?.last_name}
                   </h2>
-                  <p className="text-gray-400 mb-4">{profileData?.email}</p>
+                  <p className="text-gray-400 mb-1">{profileData?.email}</p>
+                  <p className="text-gray-400 mb-4">{profileData?.phone}</p>
+
 
                   <div className="flex justify-center gap-4 text-sm text-gray-400">
                     <div className="flex items-center gap-1">
@@ -157,11 +161,10 @@ const Profile = () => {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={() => setIsEditing(!isEditing)}
-                    className={`px-6 py-3 rounded-xl font-medium transition-all duration-300 flex items-center gap-2 ${
-                      isEditing
+                    className={`px-6 py-3 rounded-xl font-medium transition-all duration-300 flex items-center gap-2 ${isEditing
                         ? 'bg-gray-600 hover:bg-gray-500 text-white'
                         : 'bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shadow-lg'
-                    }`}
+                      }`}
                   >
                     {isEditing ? (
                       <>
@@ -228,6 +231,24 @@ const Profile = () => {
                         required
                       />
                     </div>
+                    <div className="space-y-2">
+                      <label className="block text-sm font-semibold text-gray-300 flex items-center gap-2">
+                        <FaPhone className="text-yellow-400" />
+                        Phone Number
+                      </label>
+                      <input
+                        type="tel"
+                        name="phone"
+                        value={editForm.phone}
+                        onChange={handleInputChange}
+                        placeholder="Enter 10-digit phone number"
+                        inputMode="numeric"
+                        pattern="[0-9]{10}"
+                        maxLength="10"
+                        className="w-full bg-gray-600 border border-gray-500 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-yellow-500 focus:ring-2 focus:ring-yellow-500/20 transition-all"
+                        required
+                      />
+                    </div>
                     <div className="flex gap-4 pt-4">
                       <motion.button
                         whileHover={{ scale: 1.02 }}
@@ -273,12 +294,20 @@ const Profile = () => {
                         <p className="text-xl font-medium text-white">{profileData?.last_name}</p>
                       </div>
 
+                      <div className="bg-gray-600/50 rounded-xl p-6 border border-gray-500/30">
+                        <div className="flex items-center gap-3 mb-3">
+                          <FaUser className="text-purple-400 text-lg" />
+                          <span className="text-sm font-semibold text-gray-400 uppercase tracking-wide">Last Name</span>
+                        </div>
+                        <p className="text-xl font-medium text-white">{profileData?.email}</p>
+                      </div>
+
                       <div className="md:col-span-2 bg-gray-600/50 rounded-xl p-6 border border-gray-500/30">
                         <div className="flex items-center gap-3 mb-3">
                           <FaEnvelope className="text-green-400 text-lg" />
                           <span className="text-sm font-semibold text-gray-400 uppercase tracking-wide">Email Address</span>
                         </div>
-                        <p className="text-xl font-medium text-white">{profileData?.email}</p>
+                        <p className="text-xl font-medium text-white">{profileData?.phone}</p>
                       </div>
                     </div>
                   </motion.div>

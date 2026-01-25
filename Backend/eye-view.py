@@ -26,6 +26,8 @@ CORS(app)  # Allow all origins
 app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY', 'your-secret-key-change-in-production')
 jwt = JWTManager(app)
 
+current_logged_user = None
+
 # Simple user storage (in production, use a proper database)
 USERS_FILE = 'users.json'
 if not os.path.exists(USERS_FILE):
@@ -120,7 +122,7 @@ def save_users(users):
 def hash_password(password):
     return hashlib.sha256(password.encode()).hexdigest()
 
-def create_user(email, password, first_name, last_name):
+def create_user(email, password, phone, first_name, last_name):
     users = load_users()
     if email in users:
         return False, "User already exists"
@@ -130,6 +132,7 @@ def create_user(email, password, first_name, last_name):
         'id': user_id,
         'email': email,
         'password': hash_password(password),
+        'phone':phone,
         'first_name': first_name,
         'last_name': last_name,
         'created_at': datetime.datetime.now().isoformat(),
@@ -183,6 +186,22 @@ os.makedirs(clip_save_dir, exist_ok=True)
 print(f"Clip save directory set to: {clip_save_dir}")
 
 
+
+def get_current_user_phone():
+    global current_logged_user
+
+    if not current_logged_user:
+        print("No user logged in")
+        return None
+
+    users = load_users()
+    user = users.get(current_logged_user)
+
+    if user:
+        return user.get("phone")
+
+    return None
+
 def get_location():
     """Fetches the public IP based location."""
     try:
@@ -196,6 +215,11 @@ def get_location():
 
 def send_alert(confidence):
     """Handles the alerting logic: logging, Firebase push, and Twilio SMS."""
+    user_phone=get_current_user_phone()
+
+    if not user_phone.startswith("+"):
+       user_phone = "+91" + user_phone
+       
     global last_alert_time
     current_time = time.time()
     if current_time - last_alert_time < ALERT_COOLDOWN:
@@ -237,7 +261,7 @@ def send_alert(confidence):
             client.messages.create(
                 body=message_body,
                 from_=TWILIO_PHONE_NUMBER,
-                to=ADMIN_PHONE_NUMBER
+                to=user_phone
             )
             print("Twilio alert SMS sent.")
         except Exception as e:
@@ -372,8 +396,8 @@ def detect_and_stream():
                 if class_id == 1:
                     label = "Violence"
                     color = (0, 0, 255) # Red
-                    if confidence > 0.40:
-                        send_alert(confidence)
+                    # if confidence > 0.60:
+                    #     send_alert(confidence)
                 else:
                     label = "Non-violence"
                     color = (0, 255, 0) # Green
@@ -395,13 +419,15 @@ def register():
     data = request.get_json()
     email = data.get('email')
     password = data.get('password')
+    phone=data.get('phone')
     first_name = data.get('firstName', '')
     last_name = data.get('lastName', '')
 
-    if not email or not password:
-        return jsonify({'error': 'Email and password are required'}), 400
 
-    success, result = create_user(email, password, first_name, last_name)
+    if not email or not password or not phone:
+        return jsonify({'error': 'Email, phone and password are required'}), 400
+
+    success, result = create_user(email, password,phone, first_name, last_name)
     if success:
         access_token = create_access_token(identity=email)
         return jsonify({
@@ -410,6 +436,7 @@ def register():
             'user': {
                 'id': result,
                 'email': email,
+                'phone':phone,
                 'first_name': first_name,
                 'last_name': last_name
             }
@@ -428,6 +455,9 @@ def login():
 
     user = authenticate_user(email, password)
     if user:
+        global current_logged_user
+        current_logged_user = email
+
         access_token = create_access_token(identity=email)
         return jsonify({
             'message': 'Login successful',
@@ -435,6 +465,7 @@ def login():
             'user': {
                 'id': user['id'],
                 'email': user['email'],
+                'phone': user['phone'],
                 'first_name': user['first_name'],
                 'last_name': user['last_name']
             }
@@ -453,6 +484,7 @@ def get_profile():
             'user': {
                 'id': user['id'],
                 'email': user['email'],
+                'phone': user['phone'],
                 'first_name': user['first_name'],
                 'last_name': user['last_name'],
                 'created_at': user['created_at']
@@ -483,6 +515,7 @@ def update_profile():
         'user': {
             'id': users[current_user]['id'],
             'email': users[current_user]['email'],
+            'phone': users[current_user]['phone'],
             'first_name': users[current_user]['first_name'],
             'last_name': users[current_user]['last_name'],
             'created_at': users[current_user]['created_at']
