@@ -1,9 +1,6 @@
 # 👁️ GuardView – Real-Time Violence Detection System
 
-> **Note:** This project is submitted as a **Midway Project** and is currently under active development.
-  <p align="center">
-  <img src="./work.gif" alt="GuardView Demo" width="600">
-</p>
+
 
 ## 📌 Overview
 
@@ -47,15 +44,17 @@ To assist security personnel and surveillance systems by automatically detecting
 ```bash
 GuardView/
 ├── Backend/
-│   ├── eye-view.py          # Flask backend & detection logic
+│   ├── Guardview.py          # Flask backend & detection logic
+│   └── best1.pt
 │   ├── requirements.txt     # Python dependencies
 │   └── models/              # YOLO model files
+│   └── models/ 
 │
-├── EyeView-frontend/
+├── frontend/
 │   ├── public/
 │   ├── src/
 │   ├── package.json
 │   └── vite.config.js
 │
 ├── README.md
-└── LICENSE
+
