@@ -70,7 +70,7 @@ This system is designed for:
 │
 ├── README.md
 └── LICENSE
-
+```
 ## 🔧 Environment Configuration
 
 ### 🐍 Backend Configuration (`Backend/.env`)
