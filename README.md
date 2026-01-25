@@ -1,54 +1,48 @@
-# 👁️ GuardView – Real-Time Violence Detection System
+# 👁️ GuardView – Real-Time Violence Detection
 
 <div align="center">
-
-![GuardView Logo](https://img.shields.io/badge/GuardView-AI%20Powered-blue?style=for-the-badge&logo=eye&logoColor=white)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
-[![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)]
-[![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)]
-[![Flask](https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white)]
-
-**🚨 AI-powered real-time violence detection and alert system for public safety**
-
-[🚀 Quick Start](#-run-locally) • [📁 Project Structure](#-project-structure) • [🎥 Demo](#-demo)
-
+  <img src="https://img.shields.io/badge/GuardView-AI%20Powered-blue?style=for-the-badge&logo=eye&logoColor=white" alt="GuardView">
+  <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge" alt="MIT License"></a>
+  <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
+  <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React">
+  <img src="https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white" alt="Flask">
+  
+  **AI-powered real-time violence detection & alert system**
 </div>
 
 ---
 
-## 📌 Project Overview
+GuardView detects violent behavior in live video using YOLO, records clips, sends instant alerts (Twilio), stores incidents (Firebase), and shows a live dashboard (React).
 
-**GuardView** is an AI-based surveillance system that detects violent or suspicious activities in live video feeds using deep learning.  
-It automatically records incidents, sends instant alerts, and provides a web dashboard for monitoring.
+Ideal for campuses, public spaces, smart surveillance.
 
-This system is designed for:
-- Smart surveillance
-- Campus & public safety
-- Real-time threat detection
-- Reduced manual CCTV monitoring
+### ✨ Features
+- Real-time violence detection (YOLO)
+- Automatic incident video recording
+- SMS/call alerts via Twilio
+- Firebase storage & logging
+- Modern React dashboard
+- Webcam / RTSP / CCTV support
 
----
+### Demo
+**Video:** https://youtu.be/YOUR_VIDEO_LINK  
+**Dashboard:**  
+![Dashboard](https://github.com/user-attachments/assets/e972cedb-4e5f-4952-8564-d9f4b8b6e050)
 
-## ✨ Features
+### Quick Start
 
-- Real-time violence detection using **YOLO**
-- Automatic video clip recording
-- Instant SMS / Call alerts via **Twilio**
-- Incident storage using **Firebase**
-- Live monitoring dashboard (React)
-- Works with webcam / CCTV feeds
+```bash
+git clone https://github.com/VANSHPAR/GuardView--AI-surveillance-system-.git
+cd GuardView--AI-surveillance-system-
 
----
+# ─── Backend ───
+cd Backend
+python -m venv venv
+source venv/bin/activate    # Windows: .\venv\Scripts\activate
+pip install -r requirements.txt
+python eye-view.py          # → http://localhost:5000
 
-## 🎥 Demo
-
-**Demo Video:**  
-https://youtu.be/YOUR_VIDEO_LINK
-
-**Dashboard Preview:**  
-![GuardView Dashboard](https://github.com/user-attachments/assets/e972cedb-4e5f-4952-8564-d9f4b8b6e050)
-
----
-
-## 📁 Project Structure
-
+# ─── Frontend (new terminal) ───
+cd ../GuardView-frontend
+npm install
+npm run dev                 # → http://localhost:5173
