@@ -26,8 +26,6 @@ Ideal for campuses, public spaces, smart surveillance.
 
 ### Demo
 **Video:** https://youtu.be/YOUR_VIDEO_LINK  
-**Dashboard:**  
-![Dashboard](https://github.com/user-attachments/assets/e972cedb-4e5f-4952-8564-d9f4b8b6e050)
 
 ### Quick Start
 
