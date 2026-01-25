@@ -1,3 +1,4 @@
+//contact
 import { FaEnvelope, FaPhoneAlt, FaMapMarkerAlt, FaPaperPlane, FaClock, FaGlobe } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { useState } from "react";

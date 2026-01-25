@@ -1,10 +1,13 @@
+
+// --- SVG Icon Components ---
+
+// By using inline SVGs, we remove the need for the external 'react-icons' library.
+
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { motion } from 'framer-motion';
 import { FaHistory, FaVideo, FaClock, FaPlay, FaDownload, FaEye } from "react-icons/fa";
 
-// --- SVG Icon Components ---
-// By using inline SVGs, we remove the need for the external 'react-icons' library.
 const HistoryIcon = ({ className }) => (
   <svg
     className={className}
