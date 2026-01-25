@@ -56,7 +56,7 @@ This system is designed for:
 │   ├── config/              # Configuration files
 │   └── models/              # YOLO model weights
 │
-├── ⚛️ GuardView-frontend/
+├── ⚛️ frontend/
 │   ├── public/
 │   │   ├── assets/          # Images & videos
 │   │   └── index.html
