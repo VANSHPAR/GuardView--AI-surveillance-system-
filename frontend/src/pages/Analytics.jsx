@@ -147,7 +147,7 @@ const Analytics = () => {
           <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent mb-4">
             Analytics Dashboard
           </h1>
-          <p className="text-gray-400 text-lg">Comprehensive insights into your eyeview.ai system performance</p>
+          <p className="text-gray-400 text-lg">Comprehensive insights into your Guardview.ai system performance</p>
         </motion.div>
 
         {/* User Stats Cards */}

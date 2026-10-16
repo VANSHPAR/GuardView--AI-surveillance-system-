@@ -88,7 +88,7 @@ function About() {
           className="text-center mb-16"
         >
           <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-6">
-            About eyeview.ai
+            About Guardview.ai
           </h1>
           <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
             Revolutionizing surveillance with AI-powered intelligence and proactive security solutions
@@ -116,7 +116,7 @@ function About() {
                 </h2>
               </div>
               <p className="text-gray-300 leading-relaxed text-lg">
-                <strong className="text-white">eyeview.ai</strong> is an advanced real-time surveillance solution powered by artificial intelligence. Built with security, accuracy, and scalability in mind, eyeview.ai is designed to detect violence, alert authorities instantly, and store critical evidence — all without human intervention.
+                <strong className="text-white">Guardview.ai</strong> is an advanced real-time surveillance solution powered by artificial intelligence. Built with security, accuracy, and scalability in mind, Guardview.ai is designed to detect violence, alert authorities instantly, and store critical evidence — all without human intervention.
               </p>
             </motion.div>
 
@@ -133,7 +133,7 @@ function About() {
                 </h2>
               </div>
               <p className="text-gray-300 leading-relaxed text-lg">
-                The system uses a pretrained YOLO v11 deep learning model to analyze live video feeds. Once violence is detected, eyeview.ai captures a 10-second clip and pushes real-time alerts via <strong className="text-white">Twilio</strong>, while data is securely stored in <strong className="text-white">Firebase</strong> for later review.
+                The system uses a pretrained YOLO v11 deep learning model to analyze live video feeds. Once violence is detected, Guardview.ai captures a 10-second clip and pushes real-time alerts via <strong className="text-white">Twilio</strong>, while data is securely stored in <strong className="text-white">Firebase</strong> for later review.
               </p>
             </motion.div>
           </div>
@@ -146,7 +146,7 @@ function About() {
             <AiOutlineGlobal className="text-4xl text-blue-400 mx-auto mb-6" />
             <h2 className="text-3xl font-bold text-white mb-6">Our Mission</h2>
             <p className="text-xl text-gray-300 leading-relaxed max-w-4xl mx-auto">
-              Whether deployed in public spaces, educational institutions, offices, or residential societies, eyeview.ai provides an additional layer of smart security. It is equipped with a user-friendly dashboard, mobile camera support, and seamless integration capabilities, making it suitable for both small-scale and enterprise-grade environments.
+              Whether deployed in public spaces, educational institutions, offices, or residential societies, Guardview.ai provides an additional layer of smart security. It is equipped with a user-friendly dashboard, mobile camera support, and seamless integration capabilities, making it suitable for both small-scale and enterprise-grade environments.
             </p>
           </motion.div>
 
@@ -158,7 +158,7 @@ function About() {
             <FiTrendingUp className="text-4xl text-purple-400 mx-auto mb-6" />
             <h2 className="text-3xl font-bold text-white mb-6">Our Vision</h2>
             <p className="text-xl text-gray-300 leading-relaxed max-w-4xl mx-auto">
-              eyeview.ai is not just a project — it's a step towards building smarter, safer communities. With modern UI, responsive design, and robust backend infrastructure, eyeview.ai aims to revolutionize how surveillance is conducted across the globe.
+              Guardview.ai is not just a project — it's a step towards building smarter, safer communities. With modern UI, responsive design, and robust backend infrastructure, Guardview.ai aims to revolutionize how surveillance is conducted across the globe.
             </p>
           </motion.div>
 
@@ -168,7 +168,7 @@ function About() {
             className="backdrop-blur-sm bg-white/5 border border-white/10 rounded-3xl p-12"
           >
             <h2 className="text-3xl font-bold text-center bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent mb-12">
-              Why Choose eyeview.ai?
+              Why Choose Guardview.ai?
             </h2>
             <div className="grid md:grid-cols-2 gap-6">
               {features.map((feature, index) => (

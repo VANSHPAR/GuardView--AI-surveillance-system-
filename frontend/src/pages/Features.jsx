@@ -93,10 +93,10 @@ const Features = () => {
           className="text-center mb-16"
         >
           <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-6">
-            eyeview.ai Features
+            Guardview.ai Features
           </h1>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            Discover the powerful capabilities that make eyeview.ai the ultimate AI-powered surveillance solution
+            Discover the powerful capabilities that make Guardview.ai the ultimate AI-powered surveillance solution
           </p>
         </motion.div>
 
@@ -143,7 +143,7 @@ const Features = () => {
               Ready to Transform Your Security?
             </h2>
             <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-              Join thousands of organizations already using eyeview.ai to enhance their surveillance capabilities
+              Join thousands of organizations already using Guardview.ai to enhance their surveillance capabilities
             </p>
             <motion.button
               whileHover={{ scale: 1.05 }}

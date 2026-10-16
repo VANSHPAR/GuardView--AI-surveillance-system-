@@ -8,7 +8,7 @@
     <rect x="15" y="30" width="20" height="8" rx="2" fill="url(#bodyGradient)" opacity="0.7"/>
   </g>
 
-  <text x="55" y="25" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="url(#textGradient)">EyeView</text>
+  <text x="55" y="25" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="url(#textGradient)">Guardview</text>
   <text x="55" y="42" font-family="Arial, sans-serif" font-size="10" fill="#888888">AI Surveillance</text>
 
   <defs>

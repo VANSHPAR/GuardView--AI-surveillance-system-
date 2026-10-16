@@ -22,6 +22,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-EyeView-frontend\.env
-Backend\.env
-Backend\docverify-e02a1-firebase-adminsdk-fbsvc-7f6c70b3f1.json
+EyeView-frontend/.env
+frontend/.env
+Backend/.env
+Backend/*firebase-adminsdk*.json
+Backend/guard-view-*.json
+Backend/users.json
+users.json

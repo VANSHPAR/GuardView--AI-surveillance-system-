@@ -21,7 +21,7 @@ const Template = ({ title, desc1, decs2, image, formType, setIsLoggedIn }) => {
           className="flex justify-center mb-8"
         >
           <span className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-            eyeview.ai
+            Guardview.ai
           </span>
         </motion.div>
 

@@ -1,13 +1,16 @@
-{"time": "2025-09-24 01:48:31", "confidence": 0.48, "location": "Mumbai, Maharashtra, India", "video_url": "http://localhost:5000/history_clips/clip_20250924_014831.mp4"}
-{"time": "2025-09-24 01:48:46", "confidence": 0.45, "location": "Mumbai, Maharashtra, India", "video_url": "http://localhost:5000/history_clips/clip_20250924_014846.mp4"}
-{"time": "2025-09-24 08:07:03", "confidence": 0.41, "location": "Mumbai, Maharashtra, India", "video_url": "http://localhost:5000/history_clips/clip_20250924_080703.mp4"}
-{"time": "2025-09-24 08:07:28", "confidence": 0.41, "location": "Mumbai, Maharashtra, India", "video_url": "http://localhost:5000/history_clips/clip_20250924_080728.mp4"}
-
-{"time": "2025-09-24 01:48:46", "confidence": 0.45, "location": "Mumbai, Maharashtra, India", "video_url": "http://localhost:5000/history_clips/clip_20250924_014846.mp4"}
-{"time": "2026-01-24 15:21:56", "confidence": 0.46, "location": "Vadodara, Gujarat, India", "video_url": "http://localhost:5000/history_clips/clip_20260124_152156.mp4"}
-{"time": "2026-01-24 15:23:14", "confidence": 0.46, "location": "Vadodara, Gujarat, India", "video_url": "http://localhost:5000/history_clips/clip_20260124_152314.mp4"}
-{"time": "2026-01-24 15:23:24", "confidence": 0.62, "location": "Vadodara, Gujarat, India", "video_url": "http://localhost:5000/history_clips/clip_20260124_152324.mp4"}
-{"time": "2026-01-24 15:23:35", "confidence": 0.63, "location": "Vadodara, Gujarat, India", "video_url": "http://localhost:5000/history_clips/clip_20260124_152335.mp4"}
-{"time": "2026-01-24 15:25:04", "confidence": 0.62, "location": "Vadodara, Gujarat, India", "video_url": "http://localhost:5000/history_clips/clip_20260124_152504.mp4"}
-{"time": "2026-01-24 15:25:14", "confidence": 0.48, "location": "Vadodara, Gujarat, India", "video_url": "http://localhost:5000/history_clips/clip_20260124_152514.mp4"}
-{"time": "2026-01-24 15:25:25", "confidence": 0.57, "location": "Vadodara, Gujarat, India", "video_url": "http://localhost:5000/history_clips/clip_20260124_152525.mp4"}
+{"time": "2026-10-16 19:12:30", "confidence": 0.83, "location": "Vadodara, Gujarat, India", "alerttype": "Violence Detected", "video_url": "http://localhost:5000/history_clips/clip_20261016_191230.mp4"}
+{"time": "2026-10-16 19:22:26", "confidence": 0.83, "location": "Vadodara, Gujarat, India", "alerttype": "Violence Detected", "video_url": "http://localhost:5000/history_clips/clip_20261016_192226.mp4"}
+{"time": "2026-10-16 19:25:32", "confidence": 0.83, "location": "Vadodara, Gujarat, India", "alerttype": "Violence Detected", "video_url": "http://localhost:5000/history_clips/clip_20261016_192532.mp4"}
+{"time": "2026-10-16 19:32:57", "confidence": 0.83, "location": "Vadodara, Gujarat, India", "alerttype": "Violence Detected", "video_url": "http://localhost:5000/history_clips/clip_20261016_193257.mp4"}
+{"time": "2026-10-16 19:40:32", "confidence": 0.57, "location": "Vadodara, Gujarat, India", "alerttype": "Shoplifting Detected", "video_url": "http://localhost:5000/history_clips/clip_20261016_194032.mp4"}
+{"time": "2026-10-16 19:47:46", "confidence": 0.6, "location": "Vadodara, Gujarat, India", "alerttype": "Accident Detected", "video_url": "http://localhost:5000/history_clips/clip_20261016_194746.mp4"}
+{"time": "2026-10-16 19:51:05", "confidence": 0.6, "location": "Vadodara, Gujarat, India", "alerttype": "Accident Detected", "video_url": "http://localhost:5000/history_clips/clip_20261016_195105.mp4"}
+{"time": "2026-10-16 19:52:50", "confidence": 0.68, "location": "Vadodara, Gujarat, India", "alerttype": "Accident Detected", "video_url": "http://localhost:5000/history_clips/clip_20261016_195250.mp4"}
+{"time": "2026-10-16 19:57:40", "confidence": 0.6, "location": "Vadodara, Gujarat, India", "alerttype": "Accident Detected", "video_url": "http://localhost:5000/history_clips/clip_20261016_195740.mp4"}
+{"time": "2026-10-16 20:07:08", "confidence": 0.86, "location": "Vadodara, Gujarat, India", "alerttype": "Violence Detected", "video_url": "http://localhost:5000/history_clips/clip_20261016_200708.mp4"}
+{"time": "2026-10-16 20:08:16", "confidence": 0.81, "location": "Vadodara, Gujarat, India", "alerttype": "Violence Detected", "video_url": "http://localhost:5000/history_clips/clip_20261016_200816.mp4"}
+{"time": "2026-10-16 20:10:06", "confidence": 0.82, "location": "Vadodara, Gujarat, India", "alerttype": "Violence Detected", "video_url": "http://localhost:5000/history_clips/clip_20261016_201006.mp4"}
+{"time": "2026-10-16 20:11:49", "confidence": 0.57, "location": "Vadodara, Gujarat, India", "alerttype": "Shoplifting Detected", "video_url": "http://localhost:5000/history_clips/clip_20261016_201149.mp4"}
+{"time": "2026-10-16 20:43:50", "confidence": 0.57, "location": "Vadodara, Gujarat, India", "alerttype": "Shoplifting Detected", "video_url": "http://localhost:5000/history_clips/clip_20261016_204350.mp4"}
+{"time": "2026-10-16 20:49:11", "confidence": 0.57, "location": "Vadodara, Gujarat, India", "alerttype": "Shoplifting Detected", "video_url": "http://localhost:5000/history_clips/clip_20261016_204911.mp4"}
+{"time": "2026-10-16 20:52:35", "confidence": 0.57, "location": "Vadodara, Gujarat, India", "alerttype": "Shoplifting Detected", "video_url": "http://localhost:5000/history_clips/clip_20261016_205235.mp4"}

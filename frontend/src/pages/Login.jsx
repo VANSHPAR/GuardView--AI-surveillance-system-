@@ -7,7 +7,7 @@ const Login = ({setIsLoggedIn}) => {
   return (
     <Template
       title="Welcome Back"
-      desc1="Stay connected. Stay informed. Stay safe with eyeview.ai."
+      desc1="Stay connected. Stay informed. Stay safe with Guardview.ai."
       image={loginImg}
       formType="login"
       setIsLoggedIn={setIsLoggedIn}

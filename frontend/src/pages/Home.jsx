@@ -45,7 +45,7 @@
 //         {/* Paragraph & Button */}
 //         <motion.div className="flex-1 max-w-2xl" variants={fadeUp} custom={2}>
 //           <p className="text-gray-300 text-xl md:text-2xl mb-10 leading-relaxed">
-//             Stay one step ahead with <strong className="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">eyeview.ai</strong> — monitor live feeds,
+//             Stay one step ahead with <strong className="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">Guardview.ai</strong> — monitor live feeds,
 //             detect violent behavior, and send instant alerts to keep your environment safe.
 //           </p>
 
@@ -166,7 +166,7 @@ function Home({ user }) {
           <p className="text-gray-300 text-xl md:text-2xl mb-10 leading-relaxed">
             Stay one step ahead with{" "}
             <strong className="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
-              eyeview.ai
+              Guardview.ai
             </strong>{" "}
             — monitor live feeds, detect violent behavior, and send instant
             alerts to keep your environment safe.

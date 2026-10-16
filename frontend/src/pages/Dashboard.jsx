@@ -10,7 +10,8 @@ import {
   FaVideo,
   FaClock,
   FaShieldAlt,
-  FaExclamationTriangle
+  FaExclamationTriangle,
+  FaChevronDown
 } from "react-icons/fa";
 import axios from "axios";
 
@@ -34,7 +35,25 @@ const Dashboard = () => {
     uptime: "24h 30m",
     detectionAccuracy: 94.2
   });
+  const [selectedDetection, setSelectedDetection] = useState("Violence Detection");
   const videoRefs = useRef({});
+  const detectionOptions = [
+    "Violence Detection",
+    "Accident Detection",
+    "Shoplifting Detection"
+  ];
+  const handleDetectionChange = async (e) => {
+    const value = e.target.value;
+    setSelectedDetection(value);
+    try {
+      await axios.post("http://localhost:5000/set-detection-mode", {
+        mode: value
+      });
+      console.log("Detection mode sent:", value);
+    } catch (error) {
+      console.error("Failed to send detection mode", error);
+    }
+  }
 
   useEffect(() => {
     fetchAlerts();
@@ -155,10 +174,30 @@ const Dashboard = () => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
             >
-              <h2 className="text-2xl font-semibold mb-4 flex items-center gap-2">
-                <FaEye className="text-blue-400" />
-                Live Camera Feed
-              </h2>
+              <div className="flex justify-between items-center mb-4">
+                <h2 className="text-2xl font-semibold flex items-center gap-2">
+                  <FaEye className="text-blue-400" />
+                  Live Camera Feed
+                </h2>
+
+                {/* Detection Type Dropdown */}
+                <div className="relative">
+                  <select
+                    value={selectedDetection}
+                    onChange={handleDetectionChange}
+                    className="appearance-none bg-gray-800 border border-gray-700 text-white px-4 py-2 pr-10 rounded-lg outline-none focus:ring-2 focus:ring-blue-500 transition"
+                  >
+                    {detectionOptions.map((option) => (
+                      <option key={option} value={option}>
+                        {option}
+                      </option>
+                    ))}
+                  </select>
+                  <FaChevronDown
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-blue-400 pointer-events-none text-sm " />
+                </div>
+              </div>
+
 
               <div className="grid grid-cols-1 gap-6">
                 {videos.map((video) => (
@@ -203,7 +242,10 @@ const Dashboard = () => {
                       <h3 className="text-lg font-semibold text-gray-200">{video.title}</h3>
                       <div className="flex items-center gap-2 mt-2">
                         <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                        <span className="text-sm text-gray-400">Live</span>
+                        <span className="text-sm text-gray-400">
+                          Live • {selectedDetection}
+                        </span>
+
                       </div>
                     </div>
                   </motion.div>
@@ -237,7 +279,7 @@ const Dashboard = () => {
                       <div className="flex items-start gap-3">
                         <div className="w-2 h-2 bg-red-400 rounded-full mt-2 animate-pulse"></div>
                         <div className="flex-1">
-                          <p className="text-sm font-medium text-gray-200">Violence Detected</p>
+                          <p className="text-sm font-medium text-gray-200">{alert.alerttype}</p>
                           <p className="text-xs text-gray-400 mt-1">{alert.time}</p>
                           <p className="text-xs text-gray-500">Confidence: {alert.confidence}%</p>
                           <p className="text-xs text-gray-500">{alert.location}</p>

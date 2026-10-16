@@ -10,5 +10,6 @@ __pycache__/
 # IDE folders
 .vscode/
 .idea/
-.env
-docverify-e02a1-firebase-adminsdk-fbsvc-7f6c70b3f1.json
+guard-view-20676-firebase-adminsdk-fbsvc-917b6e941d.json
+*firebase-adminsdk*.json
+users.json

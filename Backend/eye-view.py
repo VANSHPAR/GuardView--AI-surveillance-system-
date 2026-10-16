@@ -4,7 +4,6 @@ from flask_jwt_extended import JWTManager, create_access_token, jwt_required, ge
 import cv2
 import firebase_admin
 from firebase_admin import credentials, db
-from twilio.rest import Client
 from ultralytics import YOLO
 import datetime
 import time
@@ -13,20 +12,36 @@ import requests
 import os
 import re
 import subprocess
+import xgboost as xgb
+
 from dotenv import load_dotenv
 from threading import Thread, Lock
 from collections import deque
 import hashlib
 import uuid
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+
+
+load_dotenv()
 
 app = Flask(__name__, static_folder="static")
 CORS(app)  # Allow all origins
+
+
 
 # JWT Setup
 app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY', 'your-secret-key-change-in-production')
 jwt = JWTManager(app)
 
+
+
+
+
+
 current_logged_user = None
+current_detection_mode = "Violence Detection"
 
 # Simple user storage (in production, use a proper database)
 USERS_FILE = 'users.json'
@@ -40,23 +55,22 @@ video_stream_lock = Lock() # Lock for reading from the video stream
 
 # --- Configuration ---
 load_dotenv()
-TWILIO_ACCOUNT_SID = os.getenv("TWILIO_ACCOUNT_SID")
-TWILIO_AUTH_TOKEN = os.getenv("TWILIO_AUTH_TOKEN")
-TWILIO_PHONE_NUMBER = os.getenv("TWILIO_PHONE_NUMBER")
-ADMIN_PHONE_NUMBER = os.getenv("ADMIN_PHONE_NUMBER")
-ALERT_COOLDOWN = 10  # Seconds between alerts
+
+ALERT_COOLDOWN = 60  # Seconds between alerts
 CLIP_DURATION = 10 # Seconds
 
 # --- YOLO Model ---
+
+model=None
 try:
-    model = YOLO("best.pt")
+    model = YOLO("best1.pt")
     print("YOLO model loaded successfully.")
 except Exception as e:
     print(f"Error loading YOLO model: {e}")
     model = None
 
 # --- Video Capture ---
-video_stream = cv2.VideoCapture(r"C:\Users\Vansh Parmar\OneDrive\Documents\dh hack2\EyeView_v2\Backend\demo.mp4")
+video_stream = cv2.VideoCapture(r"C:\Users\Vansh Parmar\Documents\Guard_View\Backend\theft2.webm")
 # if not video_stream.isOpened():
 #     print("Error: Could not open webcam.")
 # else:
@@ -78,18 +92,19 @@ frame_buffer = deque(maxlen=MAX_BUFFER_SIZE)
 firebase_initialized = False
 try:
     # IMPORTANT: Update this path to your Firebase credentials file
-    cred_path = "eyeview-v2-firebase-adminsdk-fbsvc-a1600b8e74.json"
+    cred_path = "guard-view-20676-firebase-adminsdk-fbsvc-917b6e941d.json"
 
     if not os.path.exists(cred_path):
         raise FileNotFoundError
     cred = credentials.Certificate(cred_path)
     firebase_admin.initialize_app(cred, {
-        "databaseURL": "https://eyeview-v2-default-rtdb.firebaseio.com/"
+        "databaseURL": "https://guard-view-20676-default-rtdb.firebaseio.com/"
     })
     alert_ref = db.reference("violence_detections")
     history_ref = db.reference("history_clips")
     firebase_initialized = True
     print("Firebase initialized successfully.")
+
 except FileNotFoundError:
     print("Firebase credentials file not found. Firebase features will be disabled.")
     alert_ref = None
@@ -99,13 +114,7 @@ except Exception as e:
     alert_ref = None
     history_ref = None
 
-# --- Twilio Setup ---
-try:
-    client = Client(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
-    print("Twilio client initialized.")
-except Exception as e:
-    print(f"Error initializing Twilio client: {e}")
-    client = None
+
 
 # --- User Management Functions ---
 def load_users():
@@ -187,7 +196,7 @@ print(f"Clip save directory set to: {clip_save_dir}")
 
 
 
-def get_current_user_phone():
+def get_current_user_email():
     global current_logged_user
 
     if not current_logged_user:
@@ -198,7 +207,7 @@ def get_current_user_phone():
     user = users.get(current_logged_user)
 
     if user:
-        return user.get("phone")
+        return user.get("email")
 
     return None
 
@@ -213,14 +222,15 @@ def get_location():
         print(f"Could not get location: {e}")
         return "Unknown Location"
 
-def send_alert(confidence):
-    """Handles the alerting logic: logging, Firebase push, and Twilio SMS."""
-    user_phone=get_current_user_phone()
 
-    if not user_phone.startswith("+"):
-       user_phone = "+91" + user_phone
-       
+def send_alert(confidence,label):
+    """Handles the alerting logic: logging, Firebase push, and Twilio SMS."""
+    
+    
+    
+
     global last_alert_time
+    global current_detection_mode
     current_time = time.time()
     if current_time - last_alert_time < ALERT_COOLDOWN:
         print("Alert in cooldown period. Skipping.")
@@ -233,11 +243,19 @@ def send_alert(confidence):
 
     # Generate clip filename
     clip_filename = f"clip_{timestamp.strftime('%Y%m%d_%H%M%S')}.mp4"
+    alerttype=None
+    if current_detection_mode=="Violence Detection":
+        alerttype="Violence Detected"
+    elif current_detection_mode=="Shoplifting Detection":
+        alerttype="Shoplifting Detected"
+    elif current_detection_mode=="Accident Detection":
+        alerttype="Accident Detected"
 
     alert_data = {
         "time": timestamp.strftime("%Y-%m-%d %H:%M:%S"),
         "confidence": round(confidence, 2),
         "location": location,
+        "alerttype":alerttype,
         "video_url": f"http://localhost:5000/history_clips/{clip_filename}"
     }
 
@@ -253,20 +271,47 @@ def send_alert(confidence):
         except Exception as e:
             print(f"Error pushing alert to Firebase: {e}")
 
+    try:
+            user_email=get_current_user_email()
+            if user_email:
+              message_body = f"{label} at {alert_data['time']} | Confidence: {alert_data['confidence']:.2f} | Location: {alert_data['location']}"
+              sender_email = "sysguardview@gmail.com"
+              sender_email=os.getenv("MAIL")
+              receiver_email = user_email
+              password = os.getenv("PASSWORD")
+            
+
+              
+
+# Create Message
+              msg = MIMEMultipart()
+              msg["From"] = sender_email
+              msg["To"] = receiver_email
+              msg["Subject"] = "Email from GuardView"
+
+              body = message_body
+              msg.attach(MIMEText(body, "plain"))
+
+# Gmail SMTP Server
+              server = smtplib.SMTP("smtp.gmail.com", 587)
+              server.starttls()
+              server.login(sender_email, password)
+
+# Send Email
+              server.send_message(msg)
+
+              server.quit()
+
+              print("Email sent successfully!")
+    except Exception as e:
+            print(f"Error sending Email: {e}")
+
+    
+
 
     # Send SMS via Twilio
-    if client:
-        try:
-            message_body = f"Violence detected at {alert_data['time']} | Confidence: {alert_data['confidence']:.2f} | Location: {alert_data['location']}"
-            client.messages.create(
-                body=message_body,
-                from_=TWILIO_PHONE_NUMBER,
-                to=user_phone
-            )
-            print("Twilio alert SMS sent.")
-        except Exception as e:
-            print(f"Error sending Twilio SMS: {e}")
-
+    
+       
 
     # Save the clip from the buffer in a new thread
     with frame_lock:
@@ -294,7 +339,7 @@ def save_clip(directory, filename, frames):
 
     # Use ffmpeg to create mp4
     ffmpeg_cmd = [
-        'C:\\ffmpeg-master-latest-win64-gpl-shared\\bin\\ffmpeg.exe',
+        r'C:\Users\Vansh Parmar\Downloads\ffmpeg.exe',
         '-y',  # overwrite
         '-framerate', str(FPS),
         '-i', os.path.join(temp_dir, 'frame_%04d.png'),
@@ -312,7 +357,7 @@ def save_clip(directory, filename, frames):
         thumbnail_path = os.path.join(directory, thumbnail_filename)
 
         thumbnail_cmd = [
-            'C:\\ffmpeg-master-latest-win64-gpl-shared\\bin\\ffmpeg.exe',
+            r'C:\Users\Vansh Parmar\Downloads\ffmpeg.exe',
             '-y',  # overwrite
             '-i', filepath,
             '-ss', '00:00:00.100',  # Take frame at 0.1 seconds (earlier for short clips)
@@ -353,6 +398,88 @@ def save_clip(directory, filename, frames):
         except Exception as e:
             print(f"Error pushing clip metadata to Firebase: {e}")
 
+def violence(frame):
+    global model
+    # fra=frame
+    # resized_frame = cv2.resize(fra, (640, 640))
+    # results = model(resized_frame, imgsz=640, verbose=False)
+    # h_ratio = fra.shape[0] / 640
+    # w_ratio = fra.shape[1] / 640
+    # for result in results:
+    #         for box in result.boxes:
+    #             x1, y1, x2, y2 = map(int, box.xyxy[0])
+    #             confidence = float(box.conf[0])
+    #             class_id = int(box.cls[0])
+                
+    #             x1, x2 = int(x1 * w_ratio), int(x2 * w_ratio)
+    #             y1, y2 = int(y1 * h_ratio), int(y2 * h_ratio)
+                
+    #             if class_id == 1:
+    #                 label = "Violence"
+    #                 color = (0, 0, 255) # Red
+    #                 if confidence > 0.8:
+    #                      queue_alert(confidence,"Violence Detected")
+    #             else:
+    #                 label = "Non-violence"
+    #                 color = (0, 255, 0) # Green
+
+    #             cv2.rectangle(fra, (x1, y1), (x2, y2), color, 2)
+    #             cv2.putText(fra, f"{label}: {confidence:.2f}", (x1, y1 - 10),
+    #                         cv2.FONT_HERSHEY_SIMPLEX, 0.7, color, 2)
+    # return fra
+    frame = cv2.resize(frame, (640, 480))
+    results = model.predict(frame)
+    
+    
+    
+    for box in results[0].boxes:
+            
+            cls = int(box.cls[0])
+            confidence = float(box.conf[0])
+            label = model.names[cls]
+            
+            if label=="Violence" and confidence>0.8:
+                send_alert(confidence,"Violence Detected")
+            frame=results[0].plot()
+           
+       
+        
+    return frame
+            
+
+def accident(frame):
+    global model
+    frame= cv2.resize(frame, (640, 480))
+    results = model(frame)
+    for result in results:
+            boxes = result.boxes.cpu().numpy()
+            for box in boxes:
+                confidence=float(box.conf[0])
+                if confidence > 0.6:
+                    # Draw bounding box on the frame
+                    send_alert(confidence,"Accident Detected")
+                    frame = results[0].plot()
+                    
+    return frame
+
+def shoplifting(frame):
+    global model
+    
+    results=model(frame)
+    for box in results[0].boxes:
+
+        confidence=float(box.conf[0])
+
+        cls=int(box.cls[0])
+
+        label=model.names[cls]
+
+        if label=="shoplifting" and confidence>0.49:
+            send_alert(confidence,"Shoplifting Deteced")
+
+    annotated_frame=results[0].plot()
+    return annotated_frame            
+
 
 def detect_and_stream():
     """
@@ -378,34 +505,51 @@ def detect_and_stream():
             frame_buffer.append(frame.copy())
         
         # --- Run YOLO Detection ---
-        resized_frame = cv2.resize(frame, (640, 640))
-        results = model(resized_frame, imgsz=640, verbose=False)
-
-        h_ratio = frame.shape[0] / 640
-        w_ratio = frame.shape[1] / 640
+        # resized_frame = cv2.resize(frame, (640, 640))
+        # results = model(resized_frame, imgsz=640, verbose=False)
+        # results = model(frame)
+        # h_ratio = frame.shape[0] / 640
+        # w_ratio = frame.shape[1] / 640
         
-        for result in results:
-            for box in result.boxes:
-                x1, y1, x2, y2 = map(int, box.xyxy[0])
-                confidence = float(box.conf[0])
-                class_id = int(box.cls[0])
+        # for result in results:
+        #     for box in result.boxes:
+        #         x1, y1, x2, y2 = map(int, box.xyxy[0])
+        #         confidence = float(box.conf[0])
+        #         class_id = int(box.cls[0])
                 
-                x1, x2 = int(x1 * w_ratio), int(x2 * w_ratio)
-                y1, y2 = int(y1 * h_ratio), int(y2 * h_ratio)
+        #         x1, x2 = int(x1 * w_ratio), int(x2 * w_ratio)
+        #         y1, y2 = int(y1 * h_ratio), int(y2 * h_ratio)
                 
-                if class_id == 1:
-                    label = "Violence"
-                    color = (0, 0, 255) # Red
-                    # if confidence > 0.60:
-                    #     send_alert(confidence)
-                else:
-                    label = "Non-violence"
-                    color = (0, 255, 0) # Green
+        #         if class_id == 1:
+        #             label = "Violence"
+        #             color = (0, 0, 255) # Red
+        #             if confidence > 0.80:
+        #                  send_alert(confidence)
+        #         else:
+        #             label = "Non-violence"
+        #             color = (0, 255, 0) # Green
 
-                cv2.rectangle(frame, (x1, y1), (x2, y2), color, 2)
-                cv2.putText(frame, f"{label}: {confidence:.2f}", (x1, y1 - 10),
-                            cv2.FONT_HERSHEY_SIMPLEX, 0.7, color, 2)
+        #         cv2.rectangle(frame, (x1, y1), (x2, y2), color, 2)
+        #         cv2.putText(frame, f"{label}: {confidence:.2f}", (x1, y1 - 10),
+        #                     cv2.FONT_HERSHEY_SIMPLEX, 0.7, color, 2)
+        # for result in results:
+        #     boxes = result.boxes.cpu().numpy()
+        #     for box in boxes:
+        #         confidence=float(box.conf[0])
+        #         if confidence > 0.5:
+        #             # Draw bounding box on the frame
+        #             frame = results[0].plot()
+        #             send_alert(confidence)
+        if current_detection_mode=="Violence Detection":
+            frame=violence(frame)
         
+        elif current_detection_mode=="Accident Detection":
+            frame=accident(frame)
+        
+        elif current_detection_mode=="Shoplifting Detection":
+            frame=shoplifting(frame)
+        
+
         _, buffer = cv2.imencode('.jpg', frame, [int(cv2.IMWRITE_JPEG_QUALITY), 90])
         frame_bytes = buffer.tobytes()
 
@@ -608,9 +752,53 @@ def list_clips():
     return jsonify(clips_array)
 
 
+@app.route("/set-detection-mode", methods=["POST"])
+def set_detection_mode():
+    global current_detection_mode
+    global model, model_xgb
+    data = request.json
+    if current_detection_mode!=data.get("mode"):
+     
+      current_detection_mode = data.get("mode")
+
+      print("Current Detection Mode:", current_detection_mode)
+      if current_detection_mode=="Accident Detection":
+        try:
+           model = YOLO(r"C:\Users\Vansh Parmar\Documents\Guard_View\Backend\best3.pt")
+           print("YOLO model loaded successfully.")
+        except Exception as e:
+           print(f"Error loading YOLO model: {e}")
+           model = None
+
+      elif current_detection_mode=="Violence Detection":
+        try:
+           model = YOLO(r"C:\Users\Vansh Parmar\Documents\Guard_View\Backend\violence.pt")
+           print("YOLO model loaded successfully.")
+        except Exception as e:
+           print(f"Error loading YOLO model: {e}")
+           model = None
+
+      elif current_detection_mode=="Shoplifting Detection":
+        try:
+           model = YOLO(r"C:\Users\Vansh Parmar\Documents\Guard_View\Backend\Shoplifting.pt")
+           print("YOLO model loaded successfully.")
+        except Exception as e:
+           print(f"Error loading YOLO model: {e}")
+           model = None
+
+    return jsonify({
+        "status": "success",
+        "mode": current_detection_mode
+    })
+
+    
+
 @app.route('/alerts')
 def get_alerts():
+    global current_detection_mode
     """Gets alerts from the local log file."""
+    
+    BACKEND_URL = "http://localhost:5000"
     alerts = []
     try:
         with open("alert_log.json", "r") as f:
@@ -618,13 +806,15 @@ def get_alerts():
             for line in reversed(lines):
                 if line.strip():
                     alert = json.loads(line)
+                    video_url = alert.get("video_url")
+                    full_video_url = f"{BACKEND_URL}{video_url}" if video_url and not video_url.startswith("http") else video_url
                     alerts.append({
                         "timestamp": alert["time"],
                         "location": alert["location"],
                         "confidence": alert["confidence"],
+                        "alerttype": alert["alerttype"],
                         "notified": True,
-                        "alert_type": "Violence Detected",
-                        "video_url": alert.get("video_url")
+                        "video_url": full_video_url
                     })
     except (FileNotFoundError, json.JSONDecodeError):
         pass

@@ -1,7 +1,7 @@
 
-# EyeView – Real-time Violence Detection System
+# Guardview – Real-time Violence Detection System
 
-EyeView is an AI-powered real-time violence detection and alert system designed to enhance public safety.
+Guardview is an AI-powered real-time violence detection and alert system designed to enhance public safety.
 It leverages a YOLO deep learning model integrated with Flask (backend) and a React (frontend) dashboard to analyze live video streams, detect violent activity, and respond instantly.
 
 
@@ -15,7 +15,7 @@ When suspicious activity is detected:
 
 * A web dashboard allows users to monitor live feeds, review incident history, and manage alerts in real time.
 
-EyeView is optimized for lag-free high-resolution detection, supports mobile camera feeds, and is designed for smart surveillance, smart cities, and public safety solutions.
+Guardview is optimized for lag-free high-resolution detection, supports mobile camera feeds, and is designed for smart surveillance, smart cities, and public safety solutions.
 
 ## Folder Structure
 
@@ -26,7 +26,7 @@ EyeView is optimized for lag-free high-resolution detection, supports mobile cam
 │ ├── requirements.txt
 │ └── ...
 │
-│── EyeView-frontend/ # React frontend (Vite + Tailwind)
+│── Guardview-frontend/ # React frontend (Vite + Tailwind)
 │ ├── public/
 │ ├── src/
 │ ├── .env
@@ -52,7 +52,7 @@ To run this project, you will need to add the following environment variables to
 
 `ADMIN_PHONE_NUMBER=+919876543210`      # Phone number to receive alerts
 
-### Frontend (EyeView-frontend/.env)
+### Frontend (Guardview-frontend/.env)
 #### Firebase Web Config
 `REACT_APP_FIREBASE_API_KEY=your_firebase_api_key`
 
@@ -68,7 +68,7 @@ To run this project, you will need to add the following environment variables to
 Clone the project
 
 ```bash
-  https://github.com/sahilhinge89/EyeView_v2.git
+  https://github.com/sahilhinge89/Guardview_v2.git
 ```
 
 * For backend server set up
@@ -100,7 +100,7 @@ python -m venv venv
 * For frontend server set up
  
 ```bash
-cd EyeView-frontend
+cd Guardview-frontend
 npm install
 npm run dev
 

@@ -26,12 +26,12 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
     <div className={`w-64 sm:w-72 md:w-60 min-h-screen bg-gradient-to-b from-gray-800 to-gray-900 text-white flex flex-col justify-between fixed md:relative z-50 md:z-auto transition-transform duration-300 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 md:block shadow-2xl`}>
       <div>
         <div className="flex justify-between items-center p-4 md:hidden">
-          <h2 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">eyeview.ai</h2>
+          <h2 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">Guardview.ai</h2>
           <button onClick={() => setSidebarOpen(false)} className="text-white text-2xl hover:text-gray-300 transition-colors">
             <FiX />
           </button>
         </div>
-        <h2 className="text-2xl font-bold p-4 hidden md:block bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">eyeview.ai</h2>
+        <h2 className="text-2xl font-bold p-4 hidden md:block bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">Guardview.ai</h2>
         <ul className="space-y-2 px-4">
           {/* Dashboard Section */}
           <li>

@@ -102,7 +102,7 @@ const Alerts = () => {
                       </div>
                       <div>
                         <h3 className="text-xl font-bold text-white">
-                          {alert.alert_type || "Violence Detected"}
+                          {alert.alerttype}
                         </h3>
                         <div className="flex items-center gap-2 mt-1">
                           <div className={`w-2 h-2 rounded-full ${alert.notified ? 'bg-green-400 animate-pulse' : 'bg-yellow-400'}`}></div>
