@@ -70,7 +70,7 @@ except Exception as e:
     model = None
 
 # --- Video Capture ---
-video_stream = cv2.VideoCapture(r"C:\Users\Vansh Parmar\Documents\Guard_View\Backend\theft2.webm")
+video_stream = cv2.VideoCapture(r"C:\Users\Vansh Parmar\Documents\Guard_View\Backend\theft2.mp4")
 # if not video_stream.isOpened():
 #     print("Error: Could not open webcam.")
 # else:
@@ -275,10 +275,10 @@ def send_alert(confidence,label):
             user_email=get_current_user_email()
             if user_email:
               message_body = f"{label} at {alert_data['time']} | Confidence: {alert_data['confidence']:.2f} | Location: {alert_data['location']}"
-              sender_email = "sysguardview@gmail.com"
-              sender_email=os.getenv("MAIL")
+              sender_email = os.getenv('MAIL')
+              
               receiver_email = user_email
-              password = os.getenv("PASSWORD")
+              password = os.getenv('PASSWORD')
             
 
               
@@ -427,7 +427,7 @@ def violence(frame):
     #             cv2.putText(fra, f"{label}: {confidence:.2f}", (x1, y1 - 10),
     #                         cv2.FONT_HERSHEY_SIMPLEX, 0.7, color, 2)
     # return fra
-    frame = cv2.resize(frame, (640, 480))
+    #frame = cv2.resize(frame, (640, 480))
     results = model.predict(frame)
     
     
@@ -439,6 +439,7 @@ def violence(frame):
             label = model.names[cls]
             
             if label=="Violence" and confidence>0.8:
+                #print('----------------++++++++++violence detected')
                 send_alert(confidence,"Violence Detected")
             frame=results[0].plot()
            
@@ -457,8 +458,9 @@ def accident(frame):
                 confidence=float(box.conf[0])
                 if confidence > 0.6:
                     # Draw bounding box on the frame
-                    send_alert(confidence,"Accident Detected")
-                    frame = results[0].plot()
+                   send_alert(confidence,"Accident Detected")
+                   #print("---------------+++++Accident detected")
+                   frame = results[0].plot()
                     
     return frame
 
@@ -475,7 +477,8 @@ def shoplifting(frame):
         label=model.names[cls]
 
         if label=="shoplifting" and confidence>0.49:
-            send_alert(confidence,"Shoplifting Deteced")
+           send_alert(confidence,"Shoplifting Deteced")
+           #print("-----------------++++++++++++sholifting detected")
 
     annotated_frame=results[0].plot()
     return annotated_frame            
@@ -485,6 +488,7 @@ def detect_and_stream():
     """
     Main loop to read frames, run detection, update buffer, and yield frames for streaming.
     """
+    global last_alert_time
     if not model:
         print("YOLO model not loaded. Cannot start detection.")
         return
@@ -542,12 +546,15 @@ def detect_and_stream():
         #             send_alert(confidence)
         if current_detection_mode=="Violence Detection":
             frame=violence(frame)
+            last_alert_time=0
         
         elif current_detection_mode=="Accident Detection":
             frame=accident(frame)
+            last_alert_time=0
         
         elif current_detection_mode=="Shoplifting Detection":
             frame=shoplifting(frame)
+            last_alert_time=0
         
 
         _, buffer = cv2.imencode('.jpg', frame, [int(cv2.IMWRITE_JPEG_QUALITY), 90])

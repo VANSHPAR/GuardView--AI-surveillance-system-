@@ -3,7 +3,7 @@ from flask_cors import CORS
 import cv2
 import firebase_admin
 from firebase_admin import credentials, db
-from twilio.rest import Client
+
 from ultralytics import YOLO
 import datetime
 import time
@@ -44,8 +44,7 @@ firebase_admin.initialize_app(cred, {
 alert_ref = db.reference("violence_detections")
 history_ref = db.reference("history_clips")
 
-# Twilio setup
-client = Client(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
+
 
 # Alert system
 ALERT_COOLDOWN = 10
@@ -84,11 +83,7 @@ def send_alert(frame, confidence):
 
     alert_ref.push(alert_data)
 
-    client.messages.create(
-        body=f" Violence detected at {timestamp} | Confidence: {confidence:.2f} | Location: {location}",
-        from_=TWILIO_PHONE_NUMBER,
-        to=ADMIN_PHONE_NUMBER
-    )
+   
 
     last_alert_time = current_time
     Thread(target=save_clip, args=(clip_save_dir,)).start()

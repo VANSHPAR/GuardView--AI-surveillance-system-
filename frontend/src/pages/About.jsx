@@ -19,7 +19,7 @@ const features = [
   },
   {
     icon: <FiPhoneCall className="text-blue-400" size={28} />,
-    text: "Instant alerts to admin using Twilio",
+    text: "Instant alerts to admin using Mail",
     color: "from-blue-500/20 to-cyan-500/20",
   },
   {
@@ -133,7 +133,7 @@ function About() {
                 </h2>
               </div>
               <p className="text-gray-300 leading-relaxed text-lg">
-                The system uses a pretrained YOLO v11 deep learning model to analyze live video feeds. Once violence is detected, Guardview.ai captures a 10-second clip and pushes real-time alerts via <strong className="text-white">Twilio</strong>, while data is securely stored in <strong className="text-white">Firebase</strong> for later review.
+                The system uses a pretrained YOLO v11 deep learning model to analyze live video feeds. Once violence is detected, Guardview.ai captures a 10-second clip and pushes real-time alerts via <strong className="text-white">Mail</strong>, while data is securely stored in <strong className="text-white">Firebase</strong> for later review.
               </p>
             </motion.div>
           </div>

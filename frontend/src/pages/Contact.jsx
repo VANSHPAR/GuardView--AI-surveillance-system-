@@ -1,7 +1,7 @@
-//contact
 import { FaEnvelope, FaPhoneAlt, FaMapMarkerAlt, FaPaperPlane, FaClock, FaGlobe } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { useState } from "react";
+import { toast } from "react-hot-toast";
 
 const fadeIn = {
   hidden: { opacity: 0, y: 30 },
@@ -28,7 +28,7 @@ const contactInfo = [
   {
     icon: <FaPhoneAlt className="text-green-400" size={32} />,
     title: "Phone",
-    value: "+91 63530 68090",
+    value: "+91 98987 56423",
     description: "Call us for immediate support",
     bgColor: "bg-gradient-to-br from-green-500/10 to-emerald-500/10",
     borderColor: "border-green-500/20",
@@ -55,10 +55,10 @@ function Contact() {
     e.preventDefault();
     setIsSubmitting(true);
     // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    await new Promise(resolve => setTimeout(resolve, 1000));
     setIsSubmitting(false);
     setFormData({ name: '', email: '', message: '' });
-    alert('Thank you for your message! We\'ll get back to you soon.');
+    toast.success('Thank you for your message! We will get back to you soon.');
   };
 
   const handleChange = (e) => {

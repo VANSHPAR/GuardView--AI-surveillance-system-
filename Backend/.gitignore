@@ -13,3 +13,4 @@ __pycache__/
 guard-view-20676-firebase-adminsdk-fbsvc-917b6e941d.json
 *firebase-adminsdk*.json
 users.json
+**/users.json

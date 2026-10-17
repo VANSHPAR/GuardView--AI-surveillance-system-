@@ -29,7 +29,7 @@ function LoginForm() {
         try {
             await login(formData.email, formData.password);
             navigate("/dashboard");
-        } catch (error) {
+        } catch {
             // Error is handled in the auth context with toast
         } finally {
             setIsLoading(false);

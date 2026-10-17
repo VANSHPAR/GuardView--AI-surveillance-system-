@@ -1,6 +1,5 @@
-//AuthContex
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import axios from 'axios';
+import { authAPI } from '../services/api';
 import { toast } from 'react-hot-toast';
 
 const AuthContext = createContext();
@@ -22,18 +21,17 @@ export const AuthProvider = ({ children }) => {
     const token = localStorage.getItem('access_token');
     if (token) {
       // Validate token by fetching profile
-      axios.get('http://localhost:5000/auth/profile', {
-        headers: { Authorization: `Bearer ${token}` }
-      })
-      .then(response => {
-        setUser(response.data.user);
-      })
-      .catch(() => {
-        localStorage.removeItem('access_token');
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+      authAPI.getProfile()
+        .then(response => {
+          setUser(response.data.user);
+        })
+        .catch(() => {
+          localStorage.removeItem('access_token');
+          setUser(null);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
     } else {
       setLoading(false);
     }
@@ -41,13 +39,12 @@ export const AuthProvider = ({ children }) => {
 
   const signup = async (email, password, phone, firstName, lastName) => {
     try {
-      const response = await axios.post('http://localhost:5000/auth/register', {
+      const response = await authAPI.register({
         email,
         password,
         phone,
         firstName,
         lastName,
-        
       });
 
       const { access_token, user: userData } = response.data;
@@ -64,10 +61,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-      const response = await axios.post('http://localhost:5000/auth/login', {
-        email,
-        password
-      });
+      const response = await authAPI.login(email, password);
 
       const { access_token, user: userData } = response.data;
       localStorage.setItem('access_token', access_token);

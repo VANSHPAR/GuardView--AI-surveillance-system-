@@ -15,7 +15,7 @@ const featuresData = [
   {
     title: "Real-Time Alerts to Admin",
     description:
-      "Sends instant alerts to administrators via Twilio when violence is detected, enabling fast action and prevention.",
+      "Sends instant alerts to administrators via Mail when violence is detected, enabling fast action and prevention.",
     icon: <FaBell size={32} />,
     color: "from-yellow-500 to-orange-500",
     bgColor: "bg-gradient-to-br from-yellow-500/10 to-orange-500/10",
@@ -29,9 +29,9 @@ const featuresData = [
     bgColor: "bg-gradient-to-br from-purple-500/10 to-pink-500/10",
   },
   {
-    title: "Firebase + Twilio Integration",
+    title: "Firebase + Mail Integration",
     description:
-      "Utilizes Firebase for secure cloud storage of clips and Twilio to deliver SMS alerts instantly upon detection.",
+      "Utilizes Firebase for secure cloud storage of clips and Mail to deliver SMS alerts instantly upon detection.",
     icon: <MdSecurity size={32} />,
     color: "from-green-500 to-emerald-500",
     bgColor: "bg-gradient-to-br from-green-500/10 to-emerald-500/10",

@@ -3,6 +3,7 @@ import { FaEyeSlash, FaRegEye } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from '../context/AuthContext';
 import { motion } from "framer-motion";
+import { toast } from "react-hot-toast";
 
 const SignupForm = () => {
   const navigate = useNavigate();
@@ -14,7 +15,6 @@ const SignupForm = () => {
     phone: "",
     password: "",
     confirmPassword: ""
-
   });
 
   const [showPassword, setShowPassword] = useState(false);
@@ -31,16 +31,21 @@ const SignupForm = () => {
   async function submitHandler(event) {
     event.preventDefault();
     if (formData.password !== formData.confirmPassword) {
-      alert("Passwords do not match");
+      toast.error("Passwords do not match");
+      return;
+    }
+
+    if (formData.password.length < 6) {
+      toast.error("Password must be at least 6 characters long");
       return;
     }
 
     setIsLoading(true);
     try {
-      await signup(formData.email, formData.password,  formData.phone, formData.firstName, formData.lastName);
+      await signup(formData.email, formData.password, formData.phone, formData.firstName, formData.lastName);
       navigate("/dashboard");
-    } catch (error) {
-      // Error is handled in the auth context
+    } catch {
+      // Error is handled in the auth context with toast
     } finally {
       setIsLoading(false);
     }

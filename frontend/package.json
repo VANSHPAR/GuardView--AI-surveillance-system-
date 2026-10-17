@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "start:frontend": "vite",
-    "start:backend": "cd ../backend && python app.py",
+    "start:backend": "cd ../Backend && python eye-view.py",
     "start:all": "concurrently \"npm run start:backend\" \"npm run start:frontend\""
   },
   "dependencies": {

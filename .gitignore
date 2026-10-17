@@ -29,3 +29,4 @@ Backend/*firebase-adminsdk*.json
 Backend/guard-view-*.json
 Backend/users.json
 users.json
+**/users.json

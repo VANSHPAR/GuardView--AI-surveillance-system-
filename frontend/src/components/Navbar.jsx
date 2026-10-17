@@ -57,7 +57,7 @@ const Navbar = ({ user, sidebarOpen, setSidebarOpen }) => {
                   className="relative"
                 >
                   <Link
-                    to={`/${item.toLowerCase()}`}
+                    to={item === "Home" ? "/" : `/${item.toLowerCase()}`}
                     className="text-gray-300 hover:text-white font-medium transition-colors duration-300 relative group"
                   >
                     {item}
@@ -183,7 +183,7 @@ const Navbar = ({ user, sidebarOpen, setSidebarOpen }) => {
                   transition={{ delay: index * 0.1 }}
                 >
                   <Link
-                    to={`/${item.toLowerCase()}`}
+                    to={item === "Home" ? "/" : `/${item.toLowerCase()}`}
                     onClick={() => setMobileMenuOpen(false)}
                     className="text-gray-300 hover:text-white font-medium transition-colors duration-300 block py-3 px-6 rounded-xl hover:bg-white/10 border border-transparent hover:border-white/20"
                   >
